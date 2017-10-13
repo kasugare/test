@@ -1,6 +1,9 @@
 class Test:
     def __init__(self):
-        print "initialization test class"
+        print "## USER TEST CLASS ## \n - initialization test class"
 
     def printTest(self):
-        print "TEST"
+        return " - TEST on Class"
+
+def printTestFunction():
+    return " - TEST Function"
