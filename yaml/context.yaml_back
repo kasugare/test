@@ -1,0 +1,54 @@
+context:
+  context_version: 0.0.1
+  task:
+    &taskId_01 'task_01':
+      ml_tools: sclearn
+      # input data desc
+      input_data:
+        type: file
+        input_path: "./test_data.csv"
+        schema: {code: int, id: int, age: int, name: string}
+      # output data desc
+      output_data:
+        type: list
+        schema: &01_output_schema {id: int, value: double}
+        return_type: file
+        return_path: &01ouput_file_path "./output_data_file"
+      # model desc
+      model:
+        name: decision tree
+        version: 0.0.2
+        hyper_params: {a: 1, b: 2, c: 3}
+      # evaluation desc
+      evaluation:
+        name: evaluation
+      # predict
+      predict:
+        name: predict
+    &taskId_02 'task_02':
+      ml_tools: pyspark
+      # input data desc
+      input_data:
+        type: file
+        input_path: *01ouput_file_path
+        schema: *01_output_schema
+      # output data desc
+      output_data:
+        type: list
+        schema: {id: int, weight: double}
+        return_type: file
+        return_path: "./output_data_file.csv"
+      # model desc
+      model:
+        name: decision tree
+        version: 0.0.5
+        hyper_params: {a: 1, b: 2, c: 3}
+      data_split:
+        split: {train: 70, test: 30}
+      # evaluation desc
+      evaluation:
+        name: evaluation
+        model: test_eval_model
+      # predict
+      predict:
+        name: predict

@@ -1,0 +1,54 @@
+context:
+  0_system:
+    cpu(opt): 1
+    mem(opt): 1024
+    context_version: 0.0.1
+  1_user_info:
+    id: 000000
+    pass: xxxxxx
+  2_input_data:
+    &input_source_opt_0 file:
+      file_path: './test.csv'
+      ext_type:
+        csv:
+          delemiter: [',', ';', '|']
+          schema: [{code: int, id: int, age: int, name: string}, [int, int, int, string]]
+        txt: ''
+        obj: ''
+    &input_source_opt_1 hive:
+      hive_query: 'select * from test'
+      hive_connection_info:
+        hive_address(opt): 10.0.0.1
+        hive_db_name: 'test_db'
+        hive_username: 'test_user'
+        hive_password: test_pass'
+  3_output_data:
+    meta:
+      id: 'output_data_1'
+      type:
+        file:
+          file_path: './test_output_data_1.csv'
+        memory: 'object'
+  4_input_model:
+    model:
+      &model_source_opt_0 model_manager:
+        model_name: 'customized_random_forest_model'
+        model_version(opt): '0.0.1'
+      &model_source_opt_1 file:
+        model_name: 'customized_random_forest_model'
+        model_file_path: './customized_random_forest_model'
+      &model_source_opt_2 lib:
+        model_name: 'random_forest_model'
+        import_lib: 
+          - 'from sklearn.ensemble import RandomForestClassifier'
+          - 'from pyspark.mllib.tree import RandomForest, RandomForestModel'
+  5_output_model:
+    model_name: 'new_customized_random_forest_model'
+    
+  6_operation:
+    - operation_type: 'learning'
+    - operation_type: 'evaluation'
+    - operation_type: 'prediction'
+    - operation_type: 'split'
+
+    - 

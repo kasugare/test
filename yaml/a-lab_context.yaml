@@ -1,0 +1,45 @@
+# A-Lab Framework Context Sample v0.0.1
+context:
+	context_version: 0.0.1
+	common_info:
+		user_id: test_user
+		user_pass: test_pass
+	task:
+		- operation:
+			type: learning
+			data:
+				input_data:
+					data_type: [file, hive]
+					ext_type: csv
+					delemiter: ','
+					shema: {code: int, id: int, age: int, name: string}
+				output_data:
+
+			model:
+				input_model:
+				output_modle:
+		- operation:
+			type: evaluation
+			data:
+				input_data:
+				output_data:
+			model:
+				input_model:
+				output_modle:
+			output_model
+		- operation:
+			type: predict
+			data:
+				input_data:
+				output_data:
+			model:
+				input_model:
+				output_modle:
+		- operation:
+			type: split
+			data:
+				input_data:
+				output_data:
+			model:
+				input_model:
+				output_modle:

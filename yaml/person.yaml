@@ -1,0 +1,13 @@
+Person:
+  - Name: 손승원
+    Year: 1977
+    Hobby:
+      - Game
+      - WatchMovie
+      - Drink
+      - &TEST ABC
+      - *TEST
+    Married: true
+    Notebook: false
+    Child: none
+    Job: bigdata engineer

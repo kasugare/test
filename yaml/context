@@ -1,0 +1,91 @@
+<TaskID>
+    BLAH
+<Input Data>
+    - data meta:
+        + id: 'data1'
+            + file:
+                + file_path: './test.csv' 
+                + ext_type:
+                    + csv
+                        + delimiter: ',', ';', ...
+                        + schema: {code: int, id: int, age: int, name: string} | [int, int, int, string]
+                    + obj  # 오브젝트가 자체적으로 타입을 가지고 있어야함(형상관리 이후 확장) 
+            + hive(?):
+                + hive_query
+                + hive_connection info
+                    + hive address
+                    + hive username/passwd
+                    + hive db name
+<Output Data>
+    - data meta:
+        + id: 'data2'
+            + file:
+                + file_path: './test.csv' 
+            + memory: # with evaluation
+
+
+<Input Model>
+    - model: [cm | file]
+        + configuration_manager: # 형상관리 시스템에 요청
+            + model_name: 'model-01'
+            + version: '0.0.1'
+        + file:
+            + file_paths: []
+
+    
+<Output Model> # 형상관리 시스템에 자동 저장 
+    - new model name: new_Random_Forest_Model 
+    - hyper_parameter: hyper_parameter_info
+    + configuration_manager: # 형상관리 시스템에 요청
+        + model_name: 'model-01'
+            + version: '0.0.1'
+        + file:
+            + file_paths: []
+
+
+<Algorithm>
+    - type: Random_Forest_Predictor
+        + X: 'data1'
+        + Y: 'data2'
+        + hyper-parameter
+
+<Operation>Prediction_For_RandomForestModel
+    <InputData>input-1</InputData>
+    <OutputData>input-1+label
+    <InputModel>new_Random_Forest_Model
+    <OutputModel>
+    <Logic>
+        - type: Customized_Predictor_1
+            + X: 'input-1'
+            + Y: 'input-1+label'
+</Operation>
+
+<Operation>Evaluation_For_RandomForestModel
+    <InputData>data1_test='hdfs://101.12.123.123/abc/data1_test.csv'</InputData>
+    <OutputData>score_vector
+    <InputModel>new_Random_Forest_Model
+    <OutputModel>
+    <Logic>
+        - type: Customized_Predictor_1
+            + X: 'data1_test'
+            + Y: 'score_vector'
+</Operation>
+
+<Operation id="Splitter">
+    <InputData>data1='hdfs://101.12.123.123/abc/data1_test.csv'</InputData>
+    <OutputData>training, test
+    <InputModel>
+    <OutputModel>
+    <Logic type="custom">
+        + X: 'data1'
+        + hyper_parameter=training=0.7, test=0.3
+</Operation>
+
+
+<>
+<>
+<>
+
+<!--Evaluation-->얘는 모델을 불러서 쓰는 Algorithm 에 속함
+<!--Prediction-->얘는 모델을 불러서 쓰는 Algorithm 에 속함
+

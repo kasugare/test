@@ -1,0 +1,20 @@
+context:
+  task:
+    'task_01':
+      input_data:
+        input_path: "./test_data.csv"
+      output_data:
+        schema: {id: int, value: double}
+        return_path: "./output_data_file"
+      model:
+        name: decision tree
+    'task_02':
+      input_data:
+        input_path: "./output_data_file"
+      output_data:
+        schema: {id: int, value: double}
+        return_path: "./output_data_file1"
+      model:
+        name: decision tree
+
+
