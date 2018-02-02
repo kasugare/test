@@ -1,0 +1,14 @@
+<configuration supports_final="true">
+  <!-- This property is removed in HDP 2.5 and higher. -->
+  <property>
+    <name>atlas.rest.address</name>
+    <value>http://localhost:21000</value>
+    <deleted>true</deleted>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>atlas.cluster.name</name>
+    <on-ambari-upgrade add="false"/>
+    <deleted>true</deleted>
+  </property>
+</configuration>
