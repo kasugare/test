@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from common.util_logger import Logger
+from resource_manager.resource_info import ResourceInfo
 import multiprocessing
 import sys
 
@@ -12,11 +13,8 @@ class MainProcess:
 		self._logger = Logger(PROCESS_NAME).getLogger()
 
 	def doProcess(self):
-		self._logger.info("Show logger info format")
-		self._logger.debug("Show logger debug format")
-		self._logger.warn("Show logger warn format")
-		self._logger.critical("Show logger critical format")
-		self._logger.exception("Show logger except format")
+		resource = ResourceInfo(self._logger)
+		resource.doProcess()
 
 if __name__ == '__main__':
 	MainProcess().doProcess()
